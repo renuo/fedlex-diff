@@ -50,7 +50,7 @@ blocks:
           - bundle config set path 'vendor/bundle'
           - bundle install -j 4
           - nvm install
-          - bin/yarn install --cache-folder ~/.cache/yarn
+          - yarn install --cache-folder ~/.cache/yarn
       jobs:
         - name: linting
           commands:
@@ -85,7 +85,7 @@ blocks:
           - bundle config set path 'vendor/bundle'
           - bundle install -j 4
           - nvm install
-          - bin/yarn install --cache-folder ~/.cache/yarn
+          - yarn install --cache-folder ~/.cache/yarn
           - sem-service start postgres
           - bundle exec rails db:create db:schema:load
       jobs:
