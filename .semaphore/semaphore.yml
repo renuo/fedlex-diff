@@ -29,7 +29,7 @@ blocks:
             - bundle config set path 'vendor/bundle'
             - bundle install -j 4
             - nvm install
-            - bin/yarn install --cache-folder ~/.cache/yarn
+            - yarn install --cache-folder ~/.cache/yarn
             - source .semaphore/bin/cache_store rails
   - name: linting
     execution_time_limit:
