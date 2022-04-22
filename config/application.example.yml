@@ -1,5 +1,6 @@
-SECRET_KEY_BASE: 'rake secret'
 APP_PORT: '3000'
+
+SECRET_KEY_BASE: 'rake secret'
 
 test:
   # SELENIUM_DRIVER: 'selenium_chrome'
