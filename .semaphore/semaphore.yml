@@ -1,0 +1,116 @@
+version: "v1.0"
+name: fedlex-diff
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+auto_cancel:
+  running:
+    when: "true"
+fail_fast:
+  cancel:
+    when: "branch != 'main'"
+
+blocks:
+  - name: cache
+    execution_time_limit:
+      minutes: 10
+    dependencies: []
+    task:
+      secrets:
+        - name: fedlex-diff
+      jobs:
+        - name: cache
+          commands:
+            - checkout --use-cache
+            - gem update --system --no-document
+            - source .semaphore/bin/cache_restore rails
+            - bundle config set deployment 'true'
+            - bundle config set path 'vendor/bundle'
+            - bundle install -j 4
+            - nvm install
+            - bin/yarn install --cache-folder ~/.cache/yarn
+            - source .semaphore/bin/cache_store rails
+  - name: linting
+    execution_time_limit:
+      minutes: 5
+    dependencies: ['cache']
+    task:
+      secrets:
+        - name: fedlex-diff
+      env_vars:
+        - name: RAILS_ENV
+          value: test
+      prologue:
+        commands:
+          - checkout --use-cache
+          - gem update --system --no-document
+          - source .semaphore/bin/cache_restore rails
+          - bundle config set deployment 'true'
+          - bundle config set path 'vendor/bundle'
+          - bundle install -j 4
+          - nvm install
+          - bin/yarn install --cache-folder ~/.cache/yarn
+      jobs:
+        - name: linting
+          commands:
+            - bin/fastcheck
+      epilogue:
+        on_fail:
+          commands:
+            - mkdir -p log
+            - mkdir -p tmp/screenshots
+            - mkdir -p coverage
+            - artifact push job --expire-in 2w log
+            - artifact push job --expire-in 2w tmp/screenshots
+            - artifact push job --expire-in 2w coverage
+  - name: tests
+    execution_time_limit:
+      minutes: 10
+    dependencies: ['cache']
+    task:
+      secrets:
+        - name: fedlex-diff
+      env_vars:
+        - name: DATABASE_URL
+          value: postgresql://postgres@localhost/test?encoding=utf8
+        - name: RAILS_ENV
+          value: test
+      prologue:
+        commands:
+          - checkout --use-cache
+          - gem update --system --no-document
+          - source .semaphore/bin/cache_restore rails
+          - bundle config set deployment 'true'
+          - bundle config set path 'vendor/bundle'
+          - bundle install -j 4
+          - nvm install
+          - bin/yarn install --cache-folder ~/.cache/yarn
+          - sem-service start postgres
+          - bundle exec rails db:create db:schema:load
+      jobs:
+        - name: tests
+          commands:
+            - bin/check
+      epilogue:
+        on_fail:
+          commands:
+            - mkdir -p log
+            - mkdir -p tmp/screenshots
+            - mkdir -p coverage
+            - artifact push job log --expire-in 2w
+            - artifact push job tmp/screenshots --expire-in 2w
+            - artifact push job coverage --expire-in 2w
+promotions:
+  - name: develop
+    pipeline_file: develop-deploy.yml
+    auto_promote:
+      when: "result = 'passed' and branch = 'develop'"
+  - name: main
+    pipeline_file: main-deploy.yml
+    auto_promote:
+      when: "result = 'passed' and branch = 'main'"
+  - name: testing
+    pipeline_file: testing-deploy.yml
+    auto_promote:
+      when: "result = 'passed' and branch = 'testing'"
