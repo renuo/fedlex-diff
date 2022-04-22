@@ -24,7 +24,6 @@ module FedlexDiff
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
-    config.secret_key_base = Figaro.env.secret_key_base
 
     I18n.available_locales = %i[de]
     config.time_zone = 'Zurich' # may vary
