@@ -68,10 +68,12 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    ast (2.4.2)
     attr_extras (6.2.4)
     bindex (0.8.1)
     bootsnap (1.11.1)
       msgpack (~> 1.2)
+    brakeman (5.1.1)
     builder (3.2.4)
     capybara (3.36.0)
       addressable
@@ -137,6 +139,9 @@ GEM
     nokogiri (1.13.4-x86_64-linux)
       racc (~> 1.4)
     optimist (3.0.1)
+    parallel (1.21.0)
+    parser (3.1.1.0)
+      ast (~> 2.4.1)
     patience_diff (1.2.0)
       optimist (~> 3.0)
     pg (1.3.5)
@@ -173,6 +178,7 @@ GEM
       rake (>= 12.2)
       thor (~> 1.0)
       zeitwerk (~> 2.5)
+    rainbow (3.1.1)
     rake (13.0.6)
     redis (4.6.0)
     regexp_parser (2.3.0)
@@ -194,6 +200,27 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.11.0)
+    rubocop (1.25.1)
+      parallel (~> 1.10)
+      parser (>= 3.1.0.0)
+      rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 1.8, < 3.0)
+      rexml
+      rubocop-ast (>= 1.15.1, < 2.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 1.4.0, < 3.0)
+    rubocop-ast (1.16.0)
+      parser (>= 3.1.1.0)
+    rubocop-performance (1.13.2)
+      rubocop (>= 1.7.0, < 2.0)
+      rubocop-ast (>= 0.4.0)
+    rubocop-rails (2.13.2)
+      activesupport (>= 4.2.0)
+      rack (>= 1.1)
+      rubocop (>= 1.7.0, < 2.0)
+    rubocop-rspec (2.8.0)
+      rubocop (~> 1.19)
+    ruby-progressbar (1.11.0)
     rubyzip (2.3.2)
     selenium-webdriver (4.1.0)
       childprocess (>= 0.5, < 5.0)
@@ -207,6 +234,12 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.3)
+    slim (4.1.0)
+      temple (>= 0.7.6, < 0.9)
+      tilt (>= 2.0.6, < 2.1)
+    slim_lint (0.22.1)
+      rubocop (>= 0.78.0)
+      slim (>= 3.0, < 5.0)
     sprockets (4.0.3)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -221,13 +254,16 @@ GEM
       attr_extras (>= 6.2.4)
       diff-lcs
       patience_diff
+    temple (0.8.2)
     thor (1.2.1)
+    tilt (2.0.10)
     timeout (0.2.0)
     turbo-rails (1.0.1)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
+    unicode-display_width (2.1.0)
     web-console (4.2.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -250,6 +286,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap
+  brakeman
   capybara
   factory_bot_rails
   figaro
@@ -261,9 +298,14 @@ DEPENDENCIES
   redis (~> 4.0)
   rexml
   rspec-rails
+  rubocop
+  rubocop-performance
+  rubocop-rails
+  rubocop-rspec
   selenium-webdriver
   shoulda-matchers
   simplecov
+  slim_lint
   sprockets-rails
   stimulus-rails
   super_diff
