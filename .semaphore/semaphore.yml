@@ -86,6 +86,7 @@ blocks:
           - bundle install -j 4
           - nvm install
           - yarn install --cache-folder ~/.cache/yarn
+          - cp config/application.example.yml config/application.yml
           - sem-service start postgres
           - bundle exec rails db:create db:schema:load
       jobs:
