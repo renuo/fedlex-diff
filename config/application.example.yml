@@ -1,6 +1,10 @@
 SECRET_KEY_BASE: 'rake secret'
 APP_PORT: '3000'
 
+# SENTRY_DSN: 'find_me_on_password_manager'
+# SENTRY_ENVIRONMENT: 'local'
+# CSP_REPORT_URI: ''
+
 test:
   # SELENIUM_DRIVER: 'selenium_chrome'
   SELENIUM_DRIVER: 'selenium_chrome_headless'
