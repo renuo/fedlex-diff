@@ -52,4 +52,5 @@ group :production do
   gem 'lograge'
   gem 'sentry-rails'
   gem 'sentry-ruby'
+  gem 'sidekiq'
 end
