@@ -45,7 +45,7 @@ order by ?languageTag ?dateDocument'
 
   SR_NUMBER = '818.102'
 
-  def perform(_args)
+  def perform()
     data = retrieve_covid_data
 
     data.each_solution do |solution|
