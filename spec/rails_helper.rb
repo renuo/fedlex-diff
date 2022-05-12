@@ -12,6 +12,7 @@ require 'capybara/rspec'
 require 'capybara/rails'
 require 'selenium/webdriver'
 require 'super_diff/rspec-rails'
+require 'shoulda/matchers'
 
 RSpec.configure do |config|
   config.include Capybara::DSL
@@ -32,5 +33,12 @@ RSpec.configure do |config|
 
   config.before(:each, type: :system, js: true) do
     driven_by ENV['SELENIUM_DRIVER']&.to_sym || :selenium_chrome_headless
+  end
+end
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
   end
 end
