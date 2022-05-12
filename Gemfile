@@ -6,6 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby File.read(File.join(__dir__, '.ruby-version')).strip
 
 gem 'bootsnap', require: false
+gem 'faker'
 gem 'figaro'
 gem 'importmap-rails'
 gem 'jbuilder'
