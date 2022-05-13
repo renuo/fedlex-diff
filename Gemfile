@@ -23,6 +23,7 @@ gem 'sprockets-rails'
 gem 'stimulus-rails'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+gem 'vcr'
 
 group :development, :test do
   gem 'brakeman', require: false
@@ -49,6 +50,7 @@ group :test do
   gem 'simplecov', require: false
   gem 'super_diff'
   gem 'webdrivers'
+  gem 'webmock'
 end
 
 group :production do
