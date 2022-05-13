@@ -71,6 +71,4 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   config.action_controller.action_on_unpermitted_parameters = :raise
-
-  config.active_job.queue_adapter = :async
 end

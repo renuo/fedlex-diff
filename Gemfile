@@ -10,20 +10,16 @@ gem 'faker'
 gem 'figaro'
 gem 'importmap-rails'
 gem 'jbuilder'
-gem 'open-uri'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 7.0.2', '>= 7.0.2.3'
 gem 'redis', '~> 4.0'
-gem 'sidekiq-cron'
 gem 'simple_form'
 gem 'slim-rails'
-gem 'sparql-client'
 gem 'sprockets-rails'
 gem 'stimulus-rails'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-gem 'vcr'
 
 group :development, :test do
   gem 'brakeman', require: false
@@ -45,18 +41,15 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'rspec-sidekiq'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
   gem 'super_diff'
   gem 'webdrivers'
-  gem 'webmock'
 end
 
 group :production do
   gem 'lograge'
   gem 'sentry-rails'
   gem 'sentry-ruby'
-  gem 'sidekiq'
 end
