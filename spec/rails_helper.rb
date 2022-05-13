@@ -13,9 +13,22 @@ require 'capybara/rails'
 require 'selenium/webdriver'
 require 'super_diff/rspec-rails'
 require 'shoulda/matchers'
+require 'sidekiq/testing'
+require 'vcr'
+require 'webmock/rspec'
+
+VCR.configure do |config|
+  config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
+  config.hook_into :webmock
+  config.allow_http_connections_when_no_cassette = true
+end
 
 RSpec.configure do |config|
   config.include Capybara::DSL
+
+  config.before do
+    Sidekiq::Worker.clear_all
+  end
 
   config.before do |example|
     ActionMailer::Base.deliveries.clear

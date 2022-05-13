@@ -1,0 +1,4 @@
+fetch_covid_revisions_job:
+  cron: 0 0 * * * # every day at 00:00
+  class: FetchCovidRevisionsJob
+  queue: default
