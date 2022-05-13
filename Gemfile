@@ -45,6 +45,7 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'rspec-sidekiq'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false

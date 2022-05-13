@@ -37,7 +37,7 @@ class LawRevisionsCreator
   private
 
   def extract_legislative_text(uri)
-    opened_uri = URI.open(uri)
+    opened_uri = URI.parse(uri).open
     html = opened_uri.read
     strip_tags(sanitize(html))
   end

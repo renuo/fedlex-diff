@@ -26,8 +26,10 @@ RSpec.describe LawRevisionsCreator do
     end
 
     it 'creates a revision' do
-      law_revision_creator.find_or_create_law
-      expect { law_revision_creator.create_revision }.to change(Revision, :count).by(1)
+      VCR.use_cassette('create_covid_revisions/one_revision') do
+        law_revision_creator.find_or_create_law
+        expect { law_revision_creator.create_revision }.to change(Revision, :count).by(1)
+      end
     end
 
     it 'does not create the same law twice' do
@@ -36,9 +38,11 @@ RSpec.describe LawRevisionsCreator do
     end
 
     it 'does not create the same revision twice' do
-      law_revision_creator.find_or_create_law
-      law_revision_creator.create_revision
-      expect { law_revision_creator.create_revision }.to change(Revision, :count).by(0)
+      VCR.use_cassette('create_covid_revisions/no_multiple_revisions') do
+        law_revision_creator.find_or_create_law
+        law_revision_creator.create_revision
+        expect { law_revision_creator.create_revision }.to change(Revision, :count).by(0)
+      end
     end
   end
 end

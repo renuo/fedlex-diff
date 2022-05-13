@@ -1,20 +1,21 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'sidekiq/testing'
+Sidekiq::Testing.fake!
 
 RSpec.describe FetchCovidRevisionsJob, type: :job do
-  let(:job) { described_class.new }
-
-  let(:perform) do
-    VCR.use_cassette('fetch_covid_revisions_job/perform_job') do
-      job.perform_now
+  describe 'Sidekiq worker' do
+    it 'enqueues job' do
+      ActiveJob::Base.queue_adapter = :test
+      expect do
+        described_class.perform_later
+      end.to have_enqueued_job(described_class)
     end
-  end
 
-  describe '#perform' do
-    it 'performs SPARQL request' do
-      VCR.use_cassette('fetch_covid_revisions_job/basic_request') do
-        expect(perform).not_to eq(nil)
+    it 'performs job' do
+      VCR.use_cassette('fetch_covid_revisions_job/perform_job') do
+        expect(FetchCovidRevisionsJob.perform_now).not_to eq(nil)
       end
     end
   end
