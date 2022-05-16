@@ -6,7 +6,7 @@
     datalist#laws
       - Law.all.each do |law|
         - if law.language != 'en'
-          option data-search-targets="options" value="#{law.sr_number} - #{law.title}" = "#{law.sr_number} - #{law.title}"
+          option value="#{law.sr_number} - #{law.title}" = "#{law.sr_number} - #{law.title}"
 
   .d-flex.justify-content-center.mt-5#filler-text-container
     p#filler-text = t('search_page.filler_text')

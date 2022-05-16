@@ -4,7 +4,7 @@ let searchValue =  '';
 
 export default class extends Controller {
     static targets = [
-        'options', 'law'
+        'law'
     ];
 
     searchLaw(e) {
