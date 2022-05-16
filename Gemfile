@@ -6,6 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby File.read(File.join(__dir__, '.ruby-version')).strip
 
 gem 'bootsnap', require: false
+gem 'bootstrap', '~> 5.1.3'
 gem 'faker'
 gem 'figaro'
 gem 'importmap-rails'
@@ -15,6 +16,7 @@ gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 7.0.2', '>= 7.0.2.3'
 gem 'redis', '~> 4.0'
+gem 'sassc-rails'
 gem 'sidekiq-cron'
 gem 'simple_form'
 gem 'slim-rails'

@@ -30,4 +30,12 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  search_page:
+    title: Weclome to Fedlex Diff!
+    subtitle: A website to see the legislatives changes
+    filler_text: "Have you ever filled out your ballot papers and sent them in only later realizing that you do not know 
+    what exactly changed when it was/wasn't accepted? Well, I am sure you felt like this at least once, otherwise 
+    you wouldn't have came here. The mission of this webpage to make it easier to visualize what changed
+    between two law text revisions. Type in the classified compilation number of the law you want to have a closer
+    look at and select it to get redirected to the document page. There you can select two revisions and compare
+    them."
