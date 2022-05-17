@@ -1,2 +1,43 @@
-h1 DocumentPage#index
-p Find me in app/views/document_page/index.html.slim
+.container.mt-4
+  .row
+    .col-2
+      p Renuo AG
+    .col-10
+      h2.title = @law.title
+
+  .row
+    .col-2
+      = form_with url: '/document_page', method: :get do |form|
+        = form.radio_button :language_tag, 'de', checked: params[:language_tag] == 'de', onclick: "this.parentNode.submit();"
+        = form.label :language_de, 'de'
+        = form.radio_button :language_tag, 'fr', checked: params[:language_tag] == 'fr', onclick: "this.parentNode.submit();"
+        = form.label :language_fr, 'fr'
+        = form.radio_button :language_tag, 'it', checked: params[:language_tag] == 'it', onclick: "this.parentNode.submit();"
+        = form.label :language_it, 'it'
+        = form.hidden_field :sr_number, value: @law.sr_number
+
+        br
+        br
+
+        - @revisions.each do |rev|
+          = form.check_box :revision, { multiple: true, checked: params[:revision].present? && params[:revision].include?(rev.date_applicability) }, rev.date_applicability
+          = link_to "#{rev.date_applicability}", rev.file_uri, target: "_blank"
+          br
+
+        = form.submit
+
+    .col-10
+      button Unifield
+      button SplitView
+
+      p scrolly?
+      - unless @selected_revision1.nil? || @selected_revision2.nil?
+        p yayyy :)
+        = @selected_revision1.legislative_text
+        = @selected_revision2.legislative_text
+      - else
+        p noo :(
+
+
+
+

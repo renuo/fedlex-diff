@@ -18,8 +18,9 @@ export default class extends Controller {
         }
 
         if (searchValue.length >= 3){
-            let searchParts = this.lawTarget.value.split(/\s*\-\s*/g);
-            window.location.href = `/document_page?sr_number=${searchParts[0]}&title=${searchParts[1]}`;
+            let language = document.querySelector(`#laws option[value="${this.lawTarget.value}"]`).dataset.value
+            let searchParts = this.lawTarget.value.split(/\s*\–\s*/g);
+            window.location.href = `/document_page?sr_number=${searchParts[0]}&title=${searchParts[1]}&language_tag=${language}`;
         }
     }
 }
