@@ -383,6 +383,7 @@ DEPENDENCIES
   bootstrap (~> 5.1.3)
   brakeman
   capybara
+  diffy
   factory_bot_rails
   faker
   figaro
