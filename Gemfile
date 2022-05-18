@@ -7,6 +7,7 @@ ruby File.read(File.join(__dir__, '.ruby-version')).strip
 
 gem 'bootsnap', require: false
 gem 'bootstrap', '~> 5.1.3'
+gem 'diffy'
 gem 'faker'
 gem 'figaro'
 gem 'importmap-rails'

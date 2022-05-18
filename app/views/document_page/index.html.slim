@@ -19,24 +19,30 @@
         br
         br
 
-        - @revisions.each do |rev|
-          = form.check_box :revision, { multiple: true, checked: params[:revision].present? && params[:revision].include?(rev.date_applicability) }, rev.date_applicability
-          = link_to "#{rev.date_applicability}", rev.file_uri, target: "_blank"
-          br
+        #revisions
+          - @revisions.each do |rev|
+            .mt-1
+              = form.check_box :revision, { multiple: true, checked: params[:revision].present? && params[:revision].include?(rev.date_applicability), class: 'revisionCheckbox' }, rev.date_applicability
+              = link_to "#{rev.date_applicability}", rev.file_uri, target: "_blank"
 
-        = form.submit
+        .mt-2
+          = form.submit
 
-    .col-10
-      button Unifield
-      button SplitView
+    .col-10[data-controller='document_page']
+      button.btn.btn-primary data-document_page-target="buttonUnifield" data-action='click->document_page#showUnifield' Unifield
+      button.btn.btn-primary data-document_page-target="buttonSplitView" data-action='click->document_page#showSplitView' SplitView
+      .scroll.mt-3
+        - unless @selected_revision1.nil? || @selected_revision2.nil?
+          #unifield data-document_page-target="divUnifield"
+            = Diffy::Diff.new(@selected_revision1, @selected_revision2).to_s(:html).html_safe
+          #split-view data-document_page-target="divSplitView"
+            .left
+              = Diffy::SplitDiff.new(@selected_revision1, @selected_revision2, format: :html).left.html_safe
+            .right
+              = Diffy::SplitDiff.new(@selected_revision1, @selected_revision2, format: :html).right.html_safe
 
-      p scrolly?
-      - unless @selected_revision1.nil? || @selected_revision2.nil?
-        p yayyy :)
-        = @selected_revision1.legislative_text
-        = @selected_revision2.legislative_text
-      - else
-        p noo :(
+        - else
+          p Please select two revision and click "compare"
 
 
 
