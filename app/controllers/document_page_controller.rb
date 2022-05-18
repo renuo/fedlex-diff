@@ -5,25 +5,36 @@ class DocumentPageController < ApplicationController
     @law = Law.find_by(sr_number: params[:sr_number], language: params[:language_tag])
     @revisions = Revision.where(law_id: @law.id).order('date_applicability')
 
-    if params[:revision].present?
-      selected_revisions = grab_selected_revisions
-      @selected_revision1 = grab_revision(selected_revisions[0]) if selected_revisions[0].present?
-      @selected_revision2 = grab_revision(selected_revisions[1]) if selected_revisions[1].present?
-    end
+    return if params[:revision].blank? || !selected_two_revisions?
+
+    @selected_revisions = grab_selected_revisions
   end
 
   private
 
+  def selected_two_revisions?
+    revisions = pick_out_dates
+    revisions.length >= 2
+  end
+
   def grab_selected_revisions
-    selected_revisions = []
+    revision_dates = pick_out_dates
+    revisions = []
+    revision_dates.each { |rev_date| revisions.append(fetch_revision_text(rev_date)) }
+
+    revisions
+  end
+
+  def pick_out_dates
+    dates = []
     params[:revision].each do |rev|
-      selected_revisions.append(rev) if rev != '0'
+      dates.append(rev) if rev != '0'
     end
-    selected_revisions
+    dates
   end
 
-  def grab_revision(date_applicability)
-    @revisions.find_by(date_applicability: date_applicability)
+  def fetch_revision_text(date_applicability)
+    revision = @revisions.find_by(date_applicability: date_applicability)
+    revision.legislative_text
   end
-
 end

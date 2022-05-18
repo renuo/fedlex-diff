@@ -32,14 +32,14 @@
       button.btn.btn-primary data-document_page-target="buttonUnifield" data-action='click->document_page#showUnifield' Unifield
       button.btn.btn-primary data-document_page-target="buttonSplitView" data-action='click->document_page#showSplitView' SplitView
       .scroll.mt-3
-        - unless @selected_revision1.nil? || @selected_revision2.nil?
+        - unless @selected_revisions.nil?
           #unifield data-document_page-target="divUnifield"
-            = Diffy::Diff.new(@selected_revision1, @selected_revision2).to_s(:html).html_safe
+            = Diffy::Diff.new(@selected_revisions[0], @selected_revisions[1]).to_s(:html).html_safe
           #split-view data-document_page-target="divSplitView"
             .left
-              = Diffy::SplitDiff.new(@selected_revision1, @selected_revision2, format: :html).left.html_safe
+              = Diffy::SplitDiff.new(@selected_revisions[0], @selected_revisions[1], format: :html).left.html_safe
             .right
-              = Diffy::SplitDiff.new(@selected_revision1, @selected_revision2, format: :html).right.html_safe
+              = Diffy::SplitDiff.new(@selected_revisions[0], @selected_revisions[1], format: :html).right.html_safe
 
         - else
           p Please select two revision and click "compare"
