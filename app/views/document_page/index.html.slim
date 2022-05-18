@@ -3,9 +3,9 @@
     .col-2
       p Renuo AG
     .col-10
-      h2.title = @law.title
+      h2.title = "#{@law.sr_number} – #{@law.title}"
 
-  .row
+  .row.mt-4
     .col-2
       = form_with url: '/document_page', method: :get do |form|
         = form.radio_button :language_tag, 'de', checked: params[:language_tag] == 'de', onclick: "this.parentNode.submit();"
