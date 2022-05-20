@@ -45,3 +45,6 @@ en:
     compare_button: Compare
     unifield_button: Unifield
     split_view_button: Splitview
+    filter:
+      language: Language
+      revisions: Revisions

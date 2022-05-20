@@ -1,4 +1,4 @@
-.container.mt-4
+.container.pt-4
   .row
     .col-2
       p = t('document_page.renuo')
@@ -10,9 +10,10 @@
       = render 'filters'
 
     .col-10[data-controller='document_page']
-      button.btn.btn-primary data-document_page-target="buttonUnifield" data-action='click->document_page#showUnifield' = t('document_page.unifield_button')
-      button.btn.btn-primary data-document_page-target="buttonSplitView" data-action='click->document_page#showSplitView' = t('document_page.split_view_button')
-      .scroll.mt-3
+      .btn-group
+        button.btn.btn-primary data-document_page-target="buttonUnifield" data-action='click->document_page#showUnifield' = t('document_page.unifield_button')
+        button.btn.btn-primary data-document_page-target="buttonSplitView" data-action='click->document_page#showSplitView' = t('document_page.split_view_button')
+      .scroll
         #unifield data-document_page-target="divUnifield"
           - if @selected_revisions.nil?
             p = t('document_page.compare_placeholder')
