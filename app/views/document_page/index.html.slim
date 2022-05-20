@@ -1,49 +1,28 @@
 .container.mt-4
   .row
     .col-2
-      p Renuo AG
+      p = t('document_page.renuo')
     .col-10
       h2.title = "#{@law.sr_number} – #{@law.title}"
 
   .row.mt-4
     .col-2
-      = form_with url: '/document_page', method: :get do |form|
-        = form.radio_button :language_tag, 'de', checked: params[:language_tag] == 'de', onclick: "this.parentNode.submit();"
-        = form.label :language_de, 'de'
-        = form.radio_button :language_tag, 'fr', checked: params[:language_tag] == 'fr', onclick: "this.parentNode.submit();"
-        = form.label :language_fr, 'fr'
-        = form.radio_button :language_tag, 'it', checked: params[:language_tag] == 'it', onclick: "this.parentNode.submit();"
-        = form.label :language_it, 'it'
-        = form.hidden_field :sr_number, value: @law.sr_number
-
-        br
-        br
-
-        #revisions
-          - @revisions.each do |rev|
-            .mt-1
-              = form.check_box :revision, { multiple: true, checked: params[:revision].present? && params[:revision].include?(rev.date_applicability), class: 'revisionCheckbox' }, rev.date_applicability
-              = link_to "#{rev.date_applicability}", rev.file_uri, target: "_blank"
-
-        .mt-2
-          = form.submit
+      = render 'filters'
 
     .col-10[data-controller='document_page']
-      button.btn.btn-primary data-document_page-target="buttonUnifield" data-action='click->document_page#showUnifield' Unifield
-      button.btn.btn-primary data-document_page-target="buttonSplitView" data-action='click->document_page#showSplitView' SplitView
+      button.btn.btn-primary data-document_page-target="buttonUnifield" data-action='click->document_page#showUnifield' = t('document_page.unifield_button')
+      button.btn.btn-primary data-document_page-target="buttonSplitView" data-action='click->document_page#showSplitView' = t('document_page.split_view_button')
       .scroll.mt-3
-        - unless @selected_revisions.nil?
-          #unifield data-document_page-target="divUnifield"
+        #unifield data-document_page-target="divUnifield"
+          - if @selected_revisions.nil?
+            p = t('document_page.compare_placeholder')
+          - else
             = Diffy::Diff.new(@selected_revisions[0], @selected_revisions[1]).to_s(:html).html_safe
-          #split-view data-document_page-target="divSplitView"
+        #split-view data-document_page-target="divSplitView"
+          - if @selected_revisions.nil?
+            p = t('document_page.compare_placeholder')
+          - else
             .left
               = Diffy::SplitDiff.new(@selected_revisions[0], @selected_revisions[1], format: :html).left.html_safe
             .right
               = Diffy::SplitDiff.new(@selected_revisions[0], @selected_revisions[1], format: :html).right.html_safe
-
-        - else
-          p Please select two revision and click "compare"
-
-
-
-

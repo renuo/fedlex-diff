@@ -16,7 +16,6 @@ export default class extends Controller {
         }
 
         function selectiveCheck(event) {
-            console.log('hi')
             let checkedCheckboxes = document.querySelectorAll(".revisionCheckbox:checked");
             if (checkedCheckboxes.length >= max + 1)
                 return false;
