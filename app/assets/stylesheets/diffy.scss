@@ -1,6 +1,5 @@
 del {
   background-color: #FFEBE9;
-  text-decoration: none;
 }
 
 del::before{
@@ -31,7 +30,7 @@ li {
 }
 
 .scroll{
-  border: solid 1px;
+  border: 1px solid #ddd;
   height: 65vh;
   overflow-y: scroll;
 }

@@ -1,0 +1,51 @@
+// Copied from https://codepen.io/P42s/pen/jOYVPWL
+
+#revisions{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.revisionCheckbox{
+  cursor: pointer;
+}
+
+.filter{
+  padding: 2rem;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 1rem;
+}
+
+.filter-header{
+  margin-bottom: 1px;
+  text-decoration: underline;
+}
+
+.check-box{
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  label {
+    display: flex;
+    align-items: center;
+    column-gap: 6px;
+  }
+}
+
+.check-radio{
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+
+  label {
+    display: flex;
+    align-items: center;
+    column-gap: 6px;
+  }
+}
+
+.submit {
+  width: 100%;
+}
