@@ -39,3 +39,9 @@ en:
     between two law text revisions. Type in the classified compilation number of the law you want to have a closer
     look at and select it to get redirected to the document page. There you can select two revisions and compare
     them."
+  document_page:
+    renuo: Renuo AG
+    compare_placeholder: Please select two revision and click "compare"
+    compare_button: Compare
+    unifield_button: Unifield
+    split_view_button: Splitview

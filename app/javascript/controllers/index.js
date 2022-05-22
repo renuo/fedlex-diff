@@ -11,5 +11,7 @@ eagerLoadControllersFrom("controllers", application)
 // lazyLoadControllersFrom("controllers", application)
 
 import  SearchController from './search'
+import DocumentPageController from './document_page'
 
 application.register('search', SearchController)
+application.register('document_page', DocumentPageController)

@@ -7,6 +7,7 @@ ruby File.read(File.join(__dir__, '.ruby-version')).strip
 
 gem 'bootsnap', require: false
 gem 'bootstrap', '~> 5.1.3'
+gem 'diffy'
 gem 'faker'
 gem 'figaro'
 gem 'importmap-rails'
@@ -29,6 +30,7 @@ gem 'vcr'
 
 group :development, :test do
   gem 'brakeman', require: false
+  gem 'cypress-on-rails', '~> 1.0'
   gem 'factory_bot_rails'
   gem 'rexml'
   gem 'rspec-rails'

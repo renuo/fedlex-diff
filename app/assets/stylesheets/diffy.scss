@@ -1,0 +1,49 @@
+del {
+  background-color: #FFEBE9;
+  text-decoration: none;
+}
+
+del::before{
+  content: "- ";
+}
+
+.del strong{
+  background-color: rgba(255,129,130,0.4);
+}
+
+ins{
+  background-color: #E6FFEC;
+  text-decoration: none;
+
+}
+
+ins::before{
+  content: "+ ";
+}
+
+
+.ins strong{
+  background-color: #ABF2BC;
+}
+
+li {
+  list-style-type: none;
+}
+
+.scroll{
+  border: solid 1px;
+  height: 65vh;
+  overflow-y: scroll;
+}
+
+#split-view{
+  display: flex;
+}
+
+.left{
+  width: 45%;
+}
+
+.right{
+  width: 45%;
+}

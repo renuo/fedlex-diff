@@ -1,0 +1,21 @@
+= form_with url: '/document_page', method: :get do |form|
+  = form.radio_button :language_tag, 'de', checked: params[:language_tag] == 'de', onclick: "this.parentNode.submit();"
+  = form.label :language_de, 'de'
+  = form.radio_button :language_tag, 'fr', checked: params[:language_tag] == 'fr', onclick: "this.parentNode.submit();"
+  = form.label :language_fr, 'fr'
+  = form.radio_button :language_tag, 'it', checked: params[:language_tag] == 'it', onclick: "this.parentNode.submit();"
+  = form.label :language_it, 'it'
+  = form.hidden_field :sr_number, value: @law.sr_number
+
+  br
+  br
+
+  #revisions
+    - @revisions.each do |rev|
+      .mt-1
+        = form.check_box :revision, { multiple: true, checked: params[:revision].present? && params[:revision].include?(rev.date_applicability), class: 'revisionCheckbox' }, rev.date_applicability
+        = link_to "#{rev.date_applicability}", rev.file_uri, target: "_blank"
+
+  .mt-2
+    = form.submit(t('document_page.compare_button'))
+    

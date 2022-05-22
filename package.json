@@ -1,3 +1,7 @@
 {
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "@cypress/code-coverage": "^3.9.12",
+    "cypress": "^9.6.1"
+  }
 }
