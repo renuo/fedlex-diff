@@ -30,6 +30,7 @@ gem 'vcr'
 
 group :development, :test do
   gem 'brakeman', require: false
+  gem 'cypress-on-rails', '~> 1.0'
   gem 'factory_bot_rails'
   gem 'rexml'
   gem 'rspec-rails'
