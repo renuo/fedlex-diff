@@ -48,3 +48,4 @@ en:
     filter:
       language: Language
       revisions: Revisions
+      no_revisions: Sorry, there are currently no revisions available for this law.

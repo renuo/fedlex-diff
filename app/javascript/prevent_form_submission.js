@@ -6,24 +6,8 @@ document.addEventListener('turbo:load', () => {
         if (e.code == 'Enter' && e.target.className == 'revisionCheckbox') {
             let checkedCheckboxes = document.querySelectorAll(".revisionCheckbox:checked");
 
-            if(checkedCheckboxes.length >= max && e.target.checked == false){
-                e.preventDefault();
-            }
-
-            if(checkedCheckboxes.length >= max && e.target.checked == true){
-                e.preventDefault();
-                e.target.checked = false;
-            }
-
-            if(checkedCheckboxes.length < max && e.target.checked == true){
-                e.preventDefault();
-                e.target.checked = false;
-            }
-
-            if(checkedCheckboxes.length < max && e.target.checked == false){
-                e.preventDefault();
-                e.target.checked = true;
-            }
+            e.preventDefault(); if(checkedCheckboxes.length < max) { e.target.checked = !e.target.checked;}
+            else{e.target.checked = false;}
         }
     })
 })

@@ -18,10 +18,13 @@
     #revisions.mt-3
       .check-box.mt-1
         p.filter-header = t('document_page.filter.revisions')
-        - @revisions.each do |rev|
-          label
-            = form.check_box :revision, { multiple: true, checked: params[:revision].present? && params[:revision].include?(rev.date_applicability), class: 'revisionCheckbox' }, rev.date_applicability
-            = link_to "#{rev.date_applicability}", rev.file_uri, target: "_blank"
+        - if @revisions.present?
+          - @revisions.each do |rev|
+            label
+              = form.check_box :revision, { multiple: true, checked: params[:revision].present? && params[:revision].include?(rev.date_applicability), class: 'revisionCheckbox' }, rev.date_applicability
+              = link_to "#{rev.date_applicability}", rev.file_uri, target: "_blank"
+        - else
+          p = t('document_page.filter.no_revisions')
 
     .mt-3
       = form.submit(t('document_page.compare_button'),  class: 'btn btn-primary submit')

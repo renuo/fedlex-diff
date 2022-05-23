@@ -1,7 +1,11 @@
 
 .container.pt-4
   .row
-    .col-2
+    .col-12.back
+      = link_to '←', root_path
+  .row
+    .col-2#renuo
+      = image_tag('renuo-logo.png', id: 'renuo-logo-img')
       p = t('document_page.renuo')
     .col-10
       h2.title = "#{@law.sr_number} – #{@law.title}"

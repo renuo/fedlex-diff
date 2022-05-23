@@ -29,6 +29,11 @@ li {
   list-style-type: none;
 }
 
+#revisions{
+  height: 43vh;
+  overflow-y: scroll;
+}
+
 .scroll{
   border: 1px solid #ddd;
   height: 65vh;
